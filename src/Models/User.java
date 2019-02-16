@@ -1,35 +1,47 @@
+package Models;
 import java.sql.Connection;
 
 /**
- * The User model, with data members to each respective database field
- * <pre>
- *     <b>Domain</b>:
- *      username: String -- unique username for each user
- *      password: String -- password
- *      email: String -- Person's email
- *      firstName: String -- first name of person
- *      lastName: String -- last name of person
- *      gender: char -- either 'm' or 'f'
- *      personID: String -- foreign key from Person
- * </pre>
+ * A class for a user
  */
 public class User
 {
+    /**
+     * Unique username of this user
+     */
     private String username;
+    /**
+     * Password of this user
+     */
     private String password;
+    /**
+     * Email of this user
+     */
     private String email;
+    /**
+     * First name of this user
+     */
     private String firstName;
+    /**
+     * Last name of this user
+     */
     private String lastName;
+    /**
+     * Gender of this user
+     */
     private char gender;
+    /**
+     * Unique ID for the person corresponding to this user
+     */
     private String personID;
 
     /**
      * The single constructor for users
-     * Takes the given unique username and creates a SQL statement to be run, returning other needed data values
-     * @param userID the username for the user in the database
-     * @param conn the established database connection object
+     * Sets this object's username to user and password to pass
+     * @param user
+     * @param pass
      */
-    public User(String userID, Connection conn)
+    public User(String user, String pass)
     {
         //To be implemented later
     }
@@ -74,5 +86,30 @@ public class User
     {
         //To be implemented later
         return "";
+    }
+
+    public void setEmail()
+    {
+        //To be implemented later
+    }
+
+    public void setFirstName()
+    {
+        //To be implemented later
+    }
+
+    public void setLastName()
+    {
+        //To be implemented later
+    }
+
+    public void setGender()
+    {
+        //To be implemented later
+    }
+
+    public void setPeopleID()
+    {
+        //To be implemented later
     }
 }

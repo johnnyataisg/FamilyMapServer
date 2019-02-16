@@ -1,38 +1,52 @@
+package Models;
 import java.sql.Connection;
 
 /**
  * A class for events
- * <pre>
- *     <b>Domain</b>:
- *      eventID: String -- Unique id for event
- *      descendant: String -- The descendant this event belongs to
- *      person: String -- The person this event belongs to
- *      latitude: String -- Event location
- *      longtitude: String -- Event location
- *      country: String -- Country of event
- *      city: String -- City of event
- *      eventType: String -- Type of event, birth, death, baptism, etc.
- *      year: String -- Time of event
- * </pre>
  */
 public class Event
 {
+    /**
+     * Unique id for this event
+     */
     private String eventID;
+    /**
+     * Descendant this event belongs to
+     */
     private String descendant;
+    /**
+     * PersonID of the person this event belongs to
+     */
     private String person;
+    /**
+     * Latitude of location of event
+     */
     private String latitude;
+    /**
+     * Longtitude of location of event
+     */
     private String longtitude;
+    /**
+     * Country of location of event
+     */
     private String country;
+    /**
+     * City of location of event
+     */
     private String city;
+    /**
+     * Type of event, ex: baptism, birth, death, etc.
+     */
     private String eventType;
+    /**
+     * Year of event
+     */
     private String year;
 
     /**
-     * Creates an SQL statement with the eventID in the where clause and takes the returned values and sets it to the data members in this instance
-     * @param eventID
-     * @param conn
+     * Default constructor to create an empty Event object
      */
-    public Event(String eventID, Connection conn)
+    public Event()
     {
         //To be implemented later
     }
@@ -89,5 +103,50 @@ public class Event
     {
         //To be implemented later
         return "";
+    }
+
+    public void setCity()
+    {
+        //To be implemented later
+    }
+
+    public void setCountry()
+    {
+        //To be implemented later
+    }
+
+    public void setDescendant()
+    {
+        //To be implemented later
+    }
+
+    public void setEventID()
+    {
+        //To be implemented later
+    }
+
+    public void setEventType()
+    {
+        //To be implemented later
+    }
+
+    public void setLatitude()
+    {
+        //To be implemented later
+    }
+
+    public void setLongtitude()
+    {
+        //To be implemented later
+    }
+
+    public void setPersonID()
+    {
+        //To be implemented later
+    }
+
+    public void setYear()
+    {
+        //To be implemented later
     }
 }
