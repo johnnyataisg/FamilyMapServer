@@ -6,12 +6,12 @@ import Results.RegisterResult;
 /**
  * A class handling all requests regarding user registration in the database
  */
-public class Register
+public class RegisterService
 {
     /**
      * Default constructor to create an empty Register service object
      */
-    public Register()
+    public RegisterService()
     {
 
     }

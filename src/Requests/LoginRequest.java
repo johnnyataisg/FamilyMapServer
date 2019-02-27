@@ -8,7 +8,7 @@ public class LoginRequest
     /**
      * Entered username
      */
-    private String username;
+    private String userName;
     /**
      * Entered password
      */
@@ -17,9 +17,9 @@ public class LoginRequest
     /**
      * Creates a login request given an username and password
      * @param username
-     * @param password
+     * @param pass
      */
-    public LoginRequest(String username, String password)
+    public LoginRequest(String username, String pass)
     {
 
     }

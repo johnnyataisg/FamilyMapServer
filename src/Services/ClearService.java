@@ -5,12 +5,12 @@ import Results.ClearResult;
 /**
  * A class that handles deletion of data from the database
  */
-public class Clear
+public class ClearService
 {
     /**
      * Default constructor that creates an empty clear service object
      */
-    public Clear()
+    public ClearService()
     {
 
     }

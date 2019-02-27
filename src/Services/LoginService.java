@@ -6,12 +6,12 @@ import Results.LoginResult;
 /**
  * A class to handle user login requests
  */
-public class Login
+public class LoginService
 {
     /**
      * Default constructor that creates an Login service object
      */
-    public Login()
+    public LoginService()
     {
 
     }

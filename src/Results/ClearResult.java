@@ -6,16 +6,21 @@ package Results;
 public class ClearResult
 {
     /**
-     * True if clear success, false otherwise
+     * Success message
      */
-    boolean clearSuccess;
+    private String message;
 
     /**
-     * Creates clear result object
-     * @param bool
+     * Creates a ClearResult object
+     * @param message
      */
-    public ClearResult(boolean bool)
+    public ClearResult(String message)
     {
 
+    }
+
+    public String getMessage()
+    {
+        return null;
     }
 }

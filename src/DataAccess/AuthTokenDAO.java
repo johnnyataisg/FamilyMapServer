@@ -14,7 +14,7 @@ public class AuthTokenDAO
     /**
      * A database connection instance
      */
-    private Connection cnonection;
+    private Connection connection;
 
     /**
      * Default constructor to create an empty AuthTokenDAO
@@ -53,6 +53,45 @@ public class AuthTokenDAO
     {
         //To be implemented
         return null;
+    }
+
+    /**
+     * Creates a new authentication token for a username and saves it in the database
+     * @param username
+     */
+    public void insertUserAuth(String username)
+    {
+        //To be implemented
+    }
+
+    /**
+     * Private hashing algorithm to generate an unique authentication token string
+     * @return
+     */
+    private String generateToken()
+    {
+        //To be implemented
+        return null;
+    }
+
+    /**
+     * Deletes an authentication token from the database
+     * @param token
+     */
+    public boolean deleteToken(String token)
+    {
+        //To be implemented
+        return true;
+    }
+
+    /**
+     * Clears the database of all authentication tokens related to an username
+     * @param username
+     */
+    public boolean deleteUserSessions(String username)
+    {
+        //To be implemented
+        return true;
     }
 
     public void setConnection(Connection conn)

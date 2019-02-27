@@ -8,27 +8,42 @@ import Models.User;
 public class RegisterResult
 {
     /**
-     * The newly created user object
-     */
-    private User user;
-    /**
      * The authentication token created for this new user
      */
-    private String token;
+    private String authToken;
+
     /**
      * The username of this new user
      */
-    private String username;
+    private String userName;
 
     /**
-     * Creates a new RegisterResult object
-     * @param newUser
-     * @param token
-     * @param username
+     * The Person ID of the user's generated Person object
      */
-    public RegisterResult(User newUser, String token, String username)
+    private String personID;
+
+    /**
+     * Create a success response with the new user's information and authentication token
+     * @param token
+     * @param user
+     * @param perID
+     */
+    public RegisterResult(String token, String user, String perID)
     {
     }
 
+     public String getToken()
+     {
+         return null;
+     }
 
+     public String getUsername()
+     {
+         return null;
+     }
+
+     public String getPersonID()
+     {
+         return null;
+     }
 }

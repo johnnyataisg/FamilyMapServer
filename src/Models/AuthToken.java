@@ -45,14 +45,4 @@ public class AuthToken
         //To be implemented later
         return "";
     }
-
-    public void setToken()
-    {
-        //To be implemented later
-    }
-
-    public void setUsername()
-    {
-        //To be implemented later
-    }
 }

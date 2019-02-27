@@ -1,8 +1,10 @@
 package DataAccess;
 
+import Models.AuthToken;
 import Models.Person;
 
 import java.sql.Connection;
+import java.util.List;
 
 /**
  * A class for reading and writing the person table in the database
@@ -36,7 +38,7 @@ public class PersonDAO
      * @param personID
      * @return
      */
-    public Person retrievePerson(String personID)
+    public Person retrievePersonWithID(String personID)
     {
         //To be implemented
         return null;
@@ -47,7 +49,29 @@ public class PersonDAO
      * @param username
      * @return
      */
-    public Person retrieveUser(String username)
+    public Person retrievePersonWithUsernmae(String username)
+    {
+        //To be implemented
+        return null;
+    }
+
+    /**
+     * Looks up the person with the current authentication token and retrieves all family members related to this person from the database
+     * @param token
+     * @return
+     */
+    public List<Person> retrieveFamilyMembers(AuthToken token)
+    {
+        //To be implemented
+        return null;
+    }
+
+    /**
+     * Retrieves all family members related to a person with a personID from the database
+     * @param personID
+     * @return
+     */
+    public List<Person> retrieveFamilyMembers(String personID)
     {
         //To be implemented
         return null;
@@ -59,6 +83,28 @@ public class PersonDAO
      * @return
      */
     public boolean insertPerson(Person person)
+    {
+        //To be implemented
+        return true;
+    }
+
+    /**
+     * Deletes a person with the given personID from the database
+     * @param personID
+     * @return
+     */
+    public boolean deletePerson(String personID)
+    {
+        //To be implemented
+        return true;
+    }
+
+    /**
+     * Delete all persons associated with an username if that username is valid, else return false
+     * @param username
+     * @return
+     */
+    public boolean deletePersons(String username)
     {
         //To be implemented
         return true;

@@ -76,6 +76,28 @@ public class UserDAO
         return null;
     }
 
+    /**
+     * Delete a user from the database if that user exists, else return false
+     * @param username
+     * @return
+     */
+    public boolean deleteUser(String username)
+    {
+        //To be implemented
+        return true;
+    }
+
+    /**
+     * Delete all users associated with a personID from the database if that personID exists, else return false
+     * @param personID
+     * @return
+     */
+    public boolean deleteUsers(String personID)
+    {
+        //To be implemented
+        return true;
+    }
+
     public void setConnection(Connection conn)
     {
         //To be implemented

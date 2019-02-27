@@ -1,9 +1,9 @@
 package Results;
 
 /**
- * A class for fill results
+ * A class for load results
  */
-public class FillResult
+public class LoadResult
 {
     /**
      * Success message
@@ -11,9 +11,10 @@ public class FillResult
     private String message;
 
     /**
-     * Creates a fill result object
+     * Creates a load result object
+     * @param msg
      */
-    public FillResult(String msg)
+    public LoadResult(String msg)
     {
 
     }

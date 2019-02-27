@@ -65,6 +65,28 @@ public class EventDAO
         return true;
     }
 
+    /**
+     * Deletes an event from the database if it exists, else return false
+     * @param event
+     * @return
+     */
+    public boolean deleteEvent(Event event)
+    {
+        //To be implemented
+        return true;
+    }
+
+    /**
+     * Deletes all events associated with a personID if that personID exists, else return false
+     * @param personID
+     * @return
+     */
+    public boolean deleteEvents(String personID)
+    {
+        //To be implemented
+        return true;
+    }
+
     public void setConnection(Connection conn)
     {
         //To be implemented

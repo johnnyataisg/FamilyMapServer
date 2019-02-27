@@ -8,26 +8,43 @@ import Models.User;
 public class LoginResult
 {
     /**
-     * User's username
-     */
-    private String username;
-    /**
      * User's authentication token
      */
-    private String token;
+
+    private String authToken;
     /**
-     * User object with data
+     * User's username
      */
-    private User user;
+    private String userName;
+
+    /**
+     * User's person ID
+     */
+    private String personID;
 
     /**
      * Creates a login result object
-     * @param user
-     * @param username
      * @param token
+     * @param user
+     * @param perID
      */
-    public LoginResult(User user, String username, String token)
+    public LoginResult(String token, String user, String perID)
     {
 
+    }
+
+    public String getToken()
+    {
+        return null;
+    }
+
+    public String getUsername()
+    {
+        return null;
+    }
+
+    public String getPersonID()
+    {
+        return null;
     }
 }
