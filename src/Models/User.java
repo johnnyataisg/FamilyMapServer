@@ -1,49 +1,26 @@
 package Models;
+
 import java.sql.Connection;
 
-/**
- * A class for a user
- */
 public class User
 {
-    /**
-     * Unique username of this user
-     */
     private String username;
-    /**
-     * Password of this user
-     */
     private String password;
-    /**
-     * Email of this user
-     */
     private String email;
-    /**
-     * First name of this user
-     */
     private String firstName;
-    /**
-     * Last name of this user
-     */
     private String lastName;
-    /**
-     * Gender of this user
-     */
-    private char gender;
-    /**
-     * Unique ID for the person corresponding to this user
-     */
+    private String gender;
     private String personID;
 
-    /**
-     * The single constructor for users
-     * Sets this object's username to user and password to pass
-     * @param user
-     * @param pass
-     */
-    public User(String user, String pass)
+    public User(String username, String password, String email, String firstName, String lastName, String gender, String personID)
     {
-        //To be implemented later
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.gender = gender;
+        this.personID = personID;
     }
 
     public String getUsername()
@@ -76,10 +53,10 @@ public class User
         return "";
     }
 
-    public char getGender()
+    public String getGender()
     {
         //To be implemented later
-        return 'a';
+        return "";
     }
 
     public String getPersonID()

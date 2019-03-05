@@ -1,105 +1,205 @@
 package DataAccess;
 
-import Models.Person;
 import Models.User;
-
+import javax.xml.crypto.Data;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
-/**
- * A class for reading and writing data in the User table in the database
- */
 public class UserDAO
 {
-    /**
-     * A database connection instance
-     */
     private Connection connection;
 
-    /**
-     * Default constructor to create an empty UserDAO
-     */
-    public UserDAO()
-    {
-        //To be implemented
-    }
-
-    /**
-     * Creates a UserDAO object and sets its database connection
-     * @param conn A database connection object
-     */
     public UserDAO(Connection conn)
     {
-        //To be implemented
+        this.connection = conn;
     }
 
-    /**
-     * Retrieves data for a user based upon a provided username from the database, else null if the username doesn't exist
-     * @param username
-     * @return
-     */
-    public User retrieveUser(String username)
+    public boolean insert(User user) throws DataAccessException
     {
-        //To be implemented
+        boolean commit = true;
+        String sql = "INSERT INTO Users " +
+                "(" +
+                "Username, " +
+                "Password, " +
+                "Email, " +
+                "Firstname, " +
+                "Lastname, " +
+                "Gender, " +
+                "PersonID" +
+                ") " +
+                "VALUES(?, ?, ?, ?, ?, ?, ?)";
+        try
+        {
+            PreparedStatement stmt = this.connection.prepareStatement(sql);
+            stmt.setString(1, user.getUsername());
+            stmt.setString(2, user.getPassword());
+            stmt.setString(3, user.getEmail());
+            stmt.setString(4, user.getFirstName());
+            stmt.setString(5, user.getLastName());
+            stmt.setString(6, user.getGender());
+            stmt.setString(7, user.getPersonID());
+            stmt.executeUpdate();
+        }
+        catch (SQLException e)
+        {
+            commit = false;
+            throw new DataAccessException("Error executing insert command");
+        }
+        return commit;
+    }
+
+    public User find(String username) throws DataAccessException
+    {
+        User user = null;
+        ResultSet rs = null;
+        String sql = "SELECT * FROM Users WHERE Username = ?";
+
+        try
+        {
+            PreparedStatement stmt = this.connection.prepareStatement(sql);
+            stmt.setString(1, username);
+            rs = stmt.executeQuery();
+            if (rs.next() == true)
+            {
+                user = new User(rs.getString("Username"),
+                        rs.getString("Password"),
+                        rs.getString("Email"),
+                        rs.getString("Firstname"),
+                        rs.getString("Lastname"),
+                        rs.getString("Gender"),
+                        rs.getString("PersonID"));
+                return user;
+            }
+        }
+        catch (SQLException e)
+        {
+            throw new DataAccessException("Error executing find command");
+        }
+        finally
+        {
+            if (rs != null)
+            {
+                try
+                {
+                    rs.close();
+                }
+                catch (SQLException e)
+                {
+                    e.printStackTrace();
+                }
+            }
+        }
         return null;
     }
 
-    /**
-     * Inserts an user into the database on the premise that the username doesn't exist
-     * @param user
-     */
-    public boolean insertUser(User user)
+    public boolean authenticate(String username, String password) throws DataAccessException
     {
-        //To be implemented
-        return true;
+        ResultSet rs = null;
+        String sql = "SELECT Username, Password " +
+                "FROM Users " +
+                "WHERE Username = ? AND Password = ?";
+
+        try
+        {
+            PreparedStatement stmt = this.connection.prepareStatement(sql);
+            stmt.setString(1, username);
+            stmt.setString(2, password);
+            rs = stmt.executeQuery();
+
+            if (rs.next() == true)
+            {
+                System.out.println("Authentication Successful");
+                return true;
+            }
+            else
+            {
+                System.out.println("Authentication Failed");
+                return false;
+            }
+        }
+        catch (SQLException e)
+        {
+            throw new DataAccessException("Error executing authentication command");
+        }
+        finally
+        {
+            if (rs != null)
+            {
+                try
+                {
+                    rs.close();
+                }
+                catch (SQLException e)
+                {
+                    e.printStackTrace();
+                }
+            }
+        }
     }
 
-    /**
-     * Compares the username and password with database users and returns true if there is a match, else false
-     * @param username
-     * @param password
-     * @return
-     */
-    public boolean isValidUser(String username, String password)
+    public boolean clearUsers() throws DataAccessException
     {
-        //To be implemented
-        return true;
+        boolean commit = true;
+
+        String sql = "DELETE FROM Users";
+        try
+        {
+            PreparedStatement stmt = this.connection.prepareStatement(sql);
+            stmt.executeUpdate();
+        }
+        catch (SQLException e)
+        {
+            commit = false;
+            throw new DataAccessException("Error executing clear Users command");
+        }
+        return commit;
     }
 
-    /**
-     * Retrieves the person object for the given username if the username exists in the database, else null
-     * @param username
-     * @return
-     */
-    public Person retrievePerson(String username)
+    public boolean deleteUser(String username) throws DataAccessException
     {
-        //To be implemented
-        return null;
-    }
+        boolean commit = true;
 
-    /**
-     * Delete a user from the database if that user exists, else return false
-     * @param username
-     * @return
-     */
-    public boolean deleteUser(String username)
-    {
-        //To be implemented
-        return true;
-    }
+        ResultSet rs = null;
+        String sql = "SELECT * FROM Users WHERE Username = ?";
+        String sql2 = "DELETE FROM Users WHERE Username = ?";
+        try
+        {
+            PreparedStatement stmt = this.connection.prepareStatement(sql);
+            stmt.setString(1, username);
+            rs = stmt.executeQuery();
 
-    /**
-     * Delete all users associated with a personID from the database if that personID exists, else return false
-     * @param personID
-     * @return
-     */
-    public boolean deleteUsers(String personID)
-    {
-        //To be implemented
-        return true;
-    }
-
-    public void setConnection(Connection conn)
-    {
-        //To be implemented
+            if (rs.next())
+            {
+                stmt = this.connection.prepareStatement(sql2);
+                stmt.setString(1, username);
+                stmt.executeUpdate();
+            }
+            else
+            {
+                throw new SQLException();
+            }
+        }
+        catch (SQLException e)
+        {
+            commit = false;
+            throw new DataAccessException("Error executing delete command");
+        }
+        finally
+        {
+            if (rs != null)
+            {
+                try
+                {
+                    rs.close();
+                }
+                catch (SQLException e)
+                {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return commit;
     }
 }

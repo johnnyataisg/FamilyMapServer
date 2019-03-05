@@ -1,48 +1,26 @@
 package Models;
-/**
- * A Person class
- */
+
 public class Person
 {
-    /**
-     * Unique ID for the person
-     */
     private String personID;
-    /**
-     * This person's descendant, or null if none
-     */
     private String descendant;
-    /**
-     * Person's first name
-     */
     private String firstName;
-    /**
-     * Person's last name
-     */
     private String lastName;
-    /**
-     * Person's gender
-     */
-    private char gender;
-    /**
-     * PersonID of this person's father, null if none
-     */
+    private String gender;
     private String father;
-    /**
-     * PersonID of this person's mother, null if none
-     */
     private String mother;
-    /**
-     * PersonID of this person's spouse, null if none
-     */
     private String spouse;
 
-    /**
-     * Default constructor that creates an empty Person object
-     */
-    public Person()
+    public Person(String personID, String descendant, String firstName, String lastName, String gender, String father, String mother, String spouse)
     {
-        //To be implemented
+        this.personID = personID;
+        this.descendant = descendant;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.gender = gender;
+        this.father = father;
+        this.mother = mother;
+        this.spouse = spouse;
     }
 
     public String getPersonID()
@@ -85,6 +63,11 @@ public class Person
     {
         //To be implemented
         return "";
+    }
+
+    public String getGender()
+    {
+        return this.gender;
     }
 
     public void setPersonID()
