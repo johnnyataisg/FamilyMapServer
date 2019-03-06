@@ -21,11 +21,11 @@ public class Event
     /**
      * Latitude of location of event
      */
-    private String latitude;
+    private float latitude;
     /**
      * Longtitude of location of event
      */
-    private String longtitude;
+    private float longtitude;
     /**
      * Country of location of event
      */
@@ -41,7 +41,7 @@ public class Event
     /**
      * Year of event
      */
-    private String year;
+    private int year;
 
     /**
      * Default constructor to create an empty Event object
@@ -69,16 +69,16 @@ public class Event
         return "";
     }
 
-    public String getLatitude()
+    public float getLatitude()
     {
         //To be implemented later
-        return "";
+        return this.latitude;
     }
 
-    public String getLongtitude()
+    public float getLongtitude()
     {
         //To be implemented later
-        return "";
+        return this.longtitude;
     }
 
     public String getCountry()
@@ -99,10 +99,10 @@ public class Event
         return "";
     }
 
-    public String getYear()
+    public int getYear()
     {
         //To be implemented later
-        return "";
+        return this.year;
     }
 
     public void setCity()

@@ -25,44 +25,37 @@ public class User
 
     public String getUsername()
     {
-        //To be implemented later
-        return "";
+        return this.username;
     }
 
     public String getPassword()
     {
-        //To be implemented later
-        return "";
+        return this.password;
     }
 
     public String getEmail()
     {
-        //To be implemented later
-        return "";
+        return this.email;
     }
 
     public String getFirstName()
     {
-        //To be implemented later
-        return "";
+        return this.firstName;
     }
 
     public String getLastName()
     {
-        //To be implemented later
-        return "";
+        return this.lastName;
     }
 
     public String getGender()
     {
-        //To be implemented later
-        return "";
+        return this.gender;
     }
 
     public String getPersonID()
     {
-        //To be implemented later
-        return "";
+        return this.personID;
     }
 
     public void setEmail()
