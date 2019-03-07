@@ -90,8 +90,7 @@ public class Database
                     "Father TEXT, " +
                     "Mother TEXT, " +
                     "Spouse TEXT, " +
-                    "PRIMARY KEY (PersonID), " +
-                    "FOREIGN KEY (Descendant) REFERENCES Users(Username)" +
+                    "PRIMARY KEY (PersonID)" +
                     ")";
             stmt.executeUpdate(sql);
 

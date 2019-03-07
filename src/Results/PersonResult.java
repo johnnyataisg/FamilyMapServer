@@ -3,96 +3,69 @@ package Results;
 public class PersonResult
 {
     private String descendant;
-
-    /**
-     * Person's unique ID
-     */
     private String personID;
-
-    /**
-     * Person's first name
-     */
     private String firstName;
-
-    /**
-     * Person's last name
-     */
     private String lastName;
-
-    /**
-     * Person's gender
-     */
     private String gender;
-
-    /**
-     * ID of person's father
-     */
     private String father;
-
-    /**
-     * ID of person's mother
-     */
     private String mother;
-
-    /**
-     * ID of person's spouse
-     */
     private String spouse;
-
-    /**
-     * Creates a person result object
-     * @param desc
-     * @param perID
-     * @param fName
-     * @param lName
-     * @param gen
-     * @param dad
-     * @param mom
-     * @param spo
-     */
+    private String message;
 
     public PersonResult(String desc, String perID, String fName, String lName, String gen, String dad, String mom, String spo)
     {
+        this.descendant = desc;
+        this.personID = perID;
+        this.firstName = fName;
+        this.lastName = lName;
+        this.gender = gen;
+        this.father = dad;
+        this.mother = mom;
+        this.spouse = spo;
+    }
 
+    public PersonResult(String msg)
+    {
+        this.message = msg;
     }
 
     public String getDescendant()
     {
-        return null;
+        return this.descendant;
     }
 
     public String getPersonID()
     {
-        return null;
+        return this.personID;
     }
 
     public String getFirstName()
     {
-        return null;
+        return this.firstName;
     }
 
     public String getLastName()
     {
-        return null;
+        return this.lastName;
     }
 
     public String getGender()
     {
-        return null;
+        return this.gender;
     }
 
     public String getFather()
     {
-        return null;
+        return this.father;
     }
 
     public String getMother()
     {
-        return null;
+        return this.mother;
     }
 
     public String getSpouse()
     {
-        return null;
+        return this.spouse;
     }
 }

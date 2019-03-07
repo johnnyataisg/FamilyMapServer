@@ -3,99 +3,107 @@ package DataAccess;
 import Models.AuthToken;
 import Models.User;
 
+import javax.xml.crypto.Data;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
+import java.util.UUID;
 
-/**
- * A class for reading and writing in the AuthToken table in the database
- */
 public class AuthTokenDAO
 {
-    /**
-     * A database connection instance
-     */
     private Connection connection;
 
-    /**
-     * Default constructor to create an empty AuthTokenDAO
-     */
-    public AuthTokenDAO()
-    {
-        //To be implemented
-    }
+    public AuthTokenDAO() {}
 
-    /**
-     * Creates an AuthTokenDAO object and sets its database connection
-     * @param conn
-     */
     public AuthTokenDAO(Connection conn)
     {
-        //To be implemented
+        this.connection = conn;
     }
 
-    /**
-     * Looks up an token string in the database and retrieves the user with that token string
-     * @param token
-     * @return
-     */
-    public User retrieveUser(String token)
+    public AuthToken retrieveAuthToken(String token) throws DataAccessException
     {
-        //To be implemented
+        AuthToken authToken = null;
+        ResultSet rs = null;
+        String sql = "SELECT * FROM Auth WHERE Token = ?";
+
+        try
+        {
+            PreparedStatement stmt = this.connection.prepareStatement(sql);
+            stmt.setString(1, token);
+            rs = stmt.executeQuery();
+            if (rs.next() == true)
+            {
+                authToken = new AuthToken(rs.getString("Token"), rs.getString("Username"));
+                return authToken;
+            }
+        }
+        catch (SQLException e)
+        {
+            throw new DataAccessException("Error executing find command");
+        }
+        finally
+        {
+            if (rs != null)
+            {
+                try
+                {
+                    rs.close();
+                }
+                catch (SQLException e)
+                {
+                    e.printStackTrace();
+                }
+            }
+        }
         return null;
     }
 
-    /**
-     * Looks up an username in the database and retrieves the AuthTokens with that username
-     * @param username
-     * @return
-     */
     public List<AuthToken> retrieveTokens(String username)
     {
         //To be implemented
         return null;
     }
 
-    /**
-     * Creates a new authentication token for a username and saves it in the database
-     * @param username
-     */
-    public void insertUserAuth(String username)
+    public String insertUserAuth(String username) throws DataAccessException
     {
-        //To be implemented
+        String token = this.generateToken();
+        String sql = "INSERT INTO Auth " +
+                "(" +
+                "Token, " +
+                "Username" +
+                ") " +
+                "VALUES(?, ?)";
+
+        try
+        {
+            PreparedStatement stmt = this.connection.prepareStatement(sql);
+            stmt.setString(1, token);
+            stmt.setString(2, username);
+            stmt.executeUpdate();
+        }
+        catch (SQLException e)
+        {
+            throw new DataAccessException("Error executing insert command");
+        }
+        return token;
     }
 
-    /**
-     * Private hashing algorithm to generate an unique authentication token string
-     * @return
-     */
     private String generateToken()
     {
-        //To be implemented
-        return null;
+        return UUID.randomUUID().toString();
     }
 
-    /**
-     * Deletes an authentication token from the database
-     * @param token
-     */
     public boolean deleteToken(String token)
     {
         //To be implemented
         return true;
     }
 
-    /**
-     * Clears the database of all authentication tokens related to an username
-     * @param username
-     */
     public boolean deleteUserSessions(String username)
     {
         //To be implemented
         return true;
-    }
-
-    public void setConnection(Connection conn)
-    {
-        //To be implemented
     }
 }

@@ -1,107 +1,74 @@
 package Models;
-import java.sql.Connection;
 
-/**
- * A class for events
- */
 public class Event
 {
-    /**
-     * Unique id for this event
-     */
     private String eventID;
-    /**
-     * Descendant this event belongs to
-     */
     private String descendant;
-    /**
-     * PersonID of the person this event belongs to
-     */
     private String person;
-    /**
-     * Latitude of location of event
-     */
     private float latitude;
-    /**
-     * Longtitude of location of event
-     */
     private float longtitude;
-    /**
-     * Country of location of event
-     */
     private String country;
-    /**
-     * City of location of event
-     */
     private String city;
-    /**
-     * Type of event, ex: baptism, birth, death, etc.
-     */
     private String eventType;
-    /**
-     * Year of event
-     */
     private int year;
 
-    /**
-     * Default constructor to create an empty Event object
-     */
-    public Event()
+    public Event() {}
+
+    public Event(String eventID, String descendant, String person, float latitude, float longtitude, String country, String city, String eventType, int year)
     {
-        //To be implemented later
+        this.eventID = eventID;
+        this.descendant = descendant;
+        this.person = person;
+        this.latitude = latitude;
+        this.longtitude = longtitude;
+        this.country = country;
+        this.city = city;
+        this.eventType = eventType;
+        this.year = year;
     }
 
     public String getEventID()
     {
-        //To be implemented later
-        return "";
+        return this.eventID;
     }
 
     public String getDescendant()
     {
-        //To be implemented later
-        return "";
+        return this.descendant;
     }
 
     public String getPerson()
     {
-        //To be implemented later
-        return "";
+        return this.person;
     }
 
     public float getLatitude()
     {
-        //To be implemented later
         return this.latitude;
     }
 
     public float getLongtitude()
     {
-        //To be implemented later
         return this.longtitude;
     }
 
     public String getCountry()
     {
-        //To be implemented later
-        return "";
+        return this.country;
     }
 
     public String getCity()
     {
-        //To be implemented later
-        return "";
+        return this.city;
     }
 
     public String getEventType()
     {
-        //To be implemented later
-        return "";
+        return this.eventType;
     }
 
     public int getYear()
     {
-        //To be implemented later
         return this.year;
     }
 

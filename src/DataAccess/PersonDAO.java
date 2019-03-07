@@ -54,6 +54,59 @@ public class PersonDAO
         return commit;
     }
 
+    public void setFather(String childID, String fatherID) throws DataAccessException
+    {
+        String sql = "UPDATE Persons SET Father = ? WHERE PersonID = ?";
+        try
+        {
+            PreparedStatement stmt = this.connection.prepareStatement(sql);
+            stmt.setString(1, fatherID);
+            stmt.setString(2, childID);
+            stmt.executeUpdate();
+        }
+        catch (SQLException e)
+        {
+            throw new DataAccessException("Error executing update command");
+        }
+    }
+
+    public void setMother(String childID, String motherID) throws DataAccessException
+    {
+        String sql = "UPDATE Persons SET Mother = ? WHERE PersonID = ?";
+        try
+        {
+            PreparedStatement stmt = this.connection.prepareStatement(sql);
+            stmt.setString(1, motherID);
+            stmt.setString(2, childID);
+            stmt.executeUpdate();
+        }
+        catch (SQLException e)
+        {
+            throw new DataAccessException("Error executing update command");
+        }
+    }
+
+    public void setSpouse(String fatherID, String motherID) throws DataAccessException
+    {
+        String sql = "UPDATE Persons SET Spouse = ? WHERE PersonID = ?";
+        try
+        {
+            PreparedStatement stmt = this.connection.prepareStatement(sql);
+            stmt.setString(1, motherID);
+            stmt.setString(2, fatherID);
+            stmt.executeUpdate();
+
+            stmt = this.connection.prepareStatement(sql);
+            stmt.setString(1, fatherID);
+            stmt.setString(2, motherID);
+            stmt.executeUpdate();
+        }
+        catch (SQLException e)
+        {
+            throw new DataAccessException("Error executing update command");
+        }
+    }
+
     public Person find(String personID) throws DataAccessException
     {
         Person person = null;
@@ -97,6 +150,26 @@ public class PersonDAO
             }
         }
         return null;
+    }
+
+    public boolean clearData(String username, String personID) throws DataAccessException
+    {
+        boolean commit = true;
+        String sql = "DELETE FROM Persons WHERE Descendant = ? AND PersonID != ?";
+
+        try
+        {
+            PreparedStatement stmt = this.connection.prepareStatement(sql);
+            stmt.setString(1, username);
+            stmt.setString(2, personID);
+            stmt.executeUpdate();
+        }
+        catch (SQLException e)
+        {
+            commit = false;
+            throw new DataAccessException("Error executing delete command");
+        }
+        return commit;
     }
 
     public boolean clearPersons() throws DataAccessException

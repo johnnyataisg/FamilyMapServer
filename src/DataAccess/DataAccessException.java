@@ -2,12 +2,12 @@ package DataAccess;
 
 public class DataAccessException extends Exception
 {
-    DataAccessException(String message)
+    public DataAccessException(String message)
     {
         super(message);
     }
 
-    DataAccessException()
+    public DataAccessException()
     {
         super();
     }
