@@ -26,6 +26,12 @@ public class RegisterService
             uDAO.insert(newUser);
             db.closeConnection(true);
 
+            //Insert the person object for the user into the database
+            PersonDAO pDAO = new PersonDAO(db.openConnection());
+            Person newPerson = new Person(newUser.getPersonID(), newUser.getUsername(), newUser.getFirstName(), newUser.getLastName(), newUser.getGender(), null, null, null);
+            pDAO.insert(newPerson);
+            db.closeConnection(true);
+
             //Find the new user in the database and return its credentials
             uDAO = new UserDAO(db.openConnection());
             User findUser = uDAO.find(request.getUserName());

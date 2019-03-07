@@ -25,44 +25,37 @@ public class Person
 
     public String getPersonID()
     {
-        //To be implemented
-        return "";
+        return this.personID;
     }
 
     public String getDescendant()
     {
-        //To be implemented
-        return "";
+        return this.descendant;
     }
 
     public String getFirstName()
     {
-        //To be implemented
-        return "";
+        return this.firstName;
     }
 
     public String getLastName()
     {
-        //To be implemented
-        return "";
+        return this.lastName;
     }
 
     public String getFather()
     {
-        //To be implemented
-        return "";
+        return this.father;
     }
 
     public String getMother()
     {
-        //To be implemented
-        return "";
+        return this.mother;
     }
 
     public String getSpouse()
     {
-        //To be implemented
-        return "";
+        return this.spouse;
     }
 
     public String getGender()

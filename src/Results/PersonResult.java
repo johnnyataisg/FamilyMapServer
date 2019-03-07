@@ -1,13 +1,7 @@
 package Results;
 
-/**
- * A class for person service results
- */
 public class PersonResult
 {
-    /**
-     * Name of user account this person belongs to
-     */
     private String descendant;
 
     /**

@@ -13,13 +13,13 @@ import java.nio.file.*;
 
 class FileHandler implements HttpHandler
 {
-    static String absolutePath = "C:/Users/Johnny Pao/Desktop/School Stuff/Class Files/CS 240/FamilyMapServer/src/Web/";
+    static String absolutePath = System.getProperty("user.dir") + "/src/Web/";
     static Gson gson = new Gson();
-    String responseData = "";
 
     public void handle(HttpExchange exchange) throws IOException
     {
         String requestPath = exchange.getRequestURI().toString();
+        Headers requestHeader = exchange.getRequestHeaders();
         String requestBody = readString(exchange.getRequestBody());
 
         OutputStream responseBody = exchange.getResponseBody();
@@ -44,6 +44,8 @@ class FileHandler implements HttpHandler
                 case "/favicon.ico":
                     filePathStr = absolutePath + "favicon.ico";
                     break;
+                case "/person":
+
                 case "/create":
                     Database db = new Database();
                     try

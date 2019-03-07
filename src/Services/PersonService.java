@@ -1,27 +1,31 @@
 package Services;
 
+import DataAccess.DataAccessException;
+import DataAccess.Database;
+import DataAccess.PersonDAO;
+import Models.Person;
 import Results.PersonResult;
 
-/**
- * A class for looking up the person of a specified person ID
- */
 public class PersonService
 {
-    /**
-     * Creates a person service object
-     */
-    public PersonService()
-    {
-        //To be implemented
-    }
+    public PersonService() {}
 
-    /**
-     * Returns a single person object with the specified ID
-     * @param personID
-     * @return
-     */
     public PersonResult person(String personID)
     {
-        return null;
+        Database db = new Database();
+        PersonResult result = null;
+        try
+        {
+            PersonDAO pDAO = new PersonDAO(db.openConnection());
+            Person person = pDAO.find(personID);
+            result = new PersonResult(person.getDescendant(), person.getPersonID(), person.getFirstName(), person.getLastName(), person.getGender(), person.getFather(), person.getMother(), person.getSpouse());
+            db.closeConnection(true);
+        }
+        catch (DataAccessException e)
+        {
+
+        }
+
+
     }
 }
