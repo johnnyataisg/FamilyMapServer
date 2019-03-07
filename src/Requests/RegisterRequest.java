@@ -1,7 +1,5 @@
 package Requests;
 
-import Models.User;
-
 public class RegisterRequest
 {
     private String userName;

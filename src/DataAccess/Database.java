@@ -99,8 +99,8 @@ public class Database
                     "EventID TEXT NOT NULL UNIQUE, " +
                     "Descendant TEXT, " +
                     "PersonID TEXT, " +
-                    "Latitude REAL, " +
-                    "Longtitude REAL, " +
+                    "Latitude DOUBLE, " +
+                    "Longitude DOUBLE, " +
                     "Country TEXT, " +
                     "City TEXT, " +
                     "EventType TEXT, " +

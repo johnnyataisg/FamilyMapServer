@@ -6,6 +6,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class PersonDAO
 {
@@ -152,6 +154,55 @@ public class PersonDAO
         return null;
     }
 
+    public List<Person> findFamily(String username) throws DataAccessException
+    {
+        List<Person> family = new ArrayList<>();
+        ResultSet rs = null;
+        String sql = "SELECT * FROM Persons WHERE Descendant = ?";
+
+        try
+        {
+            PreparedStatement stmt = this.connection.prepareStatement(sql);
+            stmt.setString(1, username);
+            rs = stmt.executeQuery();
+            while (rs.next() == true)
+            {
+                Person person = new Person(rs.getString("PersonID"),
+                        rs.getString("Descendant"),
+                        rs.getString("Firstname"),
+                        rs.getString("Lastname"),
+                        rs.getString("Gender"),
+                        rs.getString("Father"),
+                        rs.getString("Mother"),
+                        rs.getString("Spouse"));
+                family.add(person);
+            }
+            if (family.size() != 0)
+            {
+                return family;
+            }
+        }
+        catch (SQLException e)
+        {
+            throw new DataAccessException("Error executing find command");
+        }
+        finally
+        {
+            if (rs != null)
+            {
+                try
+                {
+                    rs.close();
+                }
+                catch (SQLException e)
+                {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return null;
+    }
+
     public boolean clearData(String username, String personID) throws DataAccessException
     {
         boolean commit = true;
@@ -207,5 +258,10 @@ public class PersonDAO
         {
             throw new DataAccessException("Error executing size command");
         }
+    }
+
+    public Connection getConnection()
+    {
+        return this.connection;
     }
 }

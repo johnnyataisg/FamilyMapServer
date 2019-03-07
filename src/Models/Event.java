@@ -4,9 +4,9 @@ public class Event
 {
     private String eventID;
     private String descendant;
-    private String person;
-    private float latitude;
-    private float longtitude;
+    private String personID;
+    private double latitude;
+    private double longitude;
     private String country;
     private String city;
     private String eventType;
@@ -14,13 +14,13 @@ public class Event
 
     public Event() {}
 
-    public Event(String eventID, String descendant, String person, float latitude, float longtitude, String country, String city, String eventType, int year)
+    public Event(String eventID, String descendant, String person, double latitude, double longitude, String country, String city, String eventType, int year)
     {
         this.eventID = eventID;
         this.descendant = descendant;
-        this.person = person;
+        this.personID = person;
         this.latitude = latitude;
-        this.longtitude = longtitude;
+        this.longitude = longitude;
         this.country = country;
         this.city = city;
         this.eventType = eventType;
@@ -39,17 +39,17 @@ public class Event
 
     public String getPerson()
     {
-        return this.person;
+        return this.personID;
     }
 
-    public float getLatitude()
+    public double getLatitude()
     {
         return this.latitude;
     }
 
-    public float getLongtitude()
+    public double getLongitude()
     {
-        return this.longtitude;
+        return this.longitude;
     }
 
     public String getCountry()
@@ -70,50 +70,5 @@ public class Event
     public int getYear()
     {
         return this.year;
-    }
-
-    public void setCity()
-    {
-        //To be implemented later
-    }
-
-    public void setCountry()
-    {
-        //To be implemented later
-    }
-
-    public void setDescendant()
-    {
-        //To be implemented later
-    }
-
-    public void setEventID()
-    {
-        //To be implemented later
-    }
-
-    public void setEventType()
-    {
-        //To be implemented later
-    }
-
-    public void setLatitude()
-    {
-        //To be implemented later
-    }
-
-    public void setLongtitude()
-    {
-        //To be implemented later
-    }
-
-    public void setPersonID()
-    {
-        //To be implemented later
-    }
-
-    public void setYear()
-    {
-        //To be implemented later
     }
 }

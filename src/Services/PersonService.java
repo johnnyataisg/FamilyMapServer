@@ -31,11 +31,11 @@ public class PersonService
             Person person = pDAO.find(personID);
             if (person == null)
             {
-                throw new DataAccessException("The person ID does not exist");
+                throw new DataAccessException("Invalid personID parameter");
             }
             if (!person.getDescendant().equals(authToken.getUsername()))
             {
-                throw new DataAccessException("This person does not belong to this user");
+                throw new DataAccessException("Requested person does not belong to this user");
             }
             result = new PersonResult(person.getDescendant(), person.getPersonID(), person.getFirstName(), person.getLastName(), person.getGender(), person.getFather(), person.getMother(), person.getSpouse());
             db.closeConnection(true);

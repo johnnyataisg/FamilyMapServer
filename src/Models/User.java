@@ -4,7 +4,7 @@ import java.sql.Connection;
 
 public class User
 {
-    private String username;
+    private String userName;
     private String password;
     private String email;
     private String firstName;
@@ -14,7 +14,7 @@ public class User
 
     public User(String username, String password, String email, String firstName, String lastName, String gender, String personID)
     {
-        this.username = username;
+        this.userName = username;
         this.password = password;
         this.email = email;
         this.firstName = firstName;
@@ -25,7 +25,7 @@ public class User
 
     public String getUsername()
     {
-        return this.username;
+        return this.userName;
     }
 
     public String getPassword()
@@ -56,30 +56,5 @@ public class User
     public String getPersonID()
     {
         return this.personID;
-    }
-
-    public void setEmail()
-    {
-        //To be implemented later
-    }
-
-    public void setFirstName()
-    {
-        //To be implemented later
-    }
-
-    public void setLastName()
-    {
-        //To be implemented later
-    }
-
-    public void setGender()
-    {
-        //To be implemented later
-    }
-
-    public void setPeopleID()
-    {
-        //To be implemented later
     }
 }

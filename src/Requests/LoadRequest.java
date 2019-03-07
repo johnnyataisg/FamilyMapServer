@@ -3,50 +3,35 @@ package Requests;
 import Models.Event;
 import Models.Person;
 import Models.User;
+import java.util.List;
 
-/**
- * A class for load requests
- */
 public class LoadRequest
 {
-    /**
-     * Array of user objects
-     */
-    private User[] users;
+    private List<User> users;
 
-    /**
-     * Array of person objects
-     */
-    private Person[] persons;
+    private List<Person> persons;
 
-    /**
-     * Array of event objects
-     */
-    private Event[] events;
+    private List<Event> events;
 
-    /**
-     * Creates a LoadRequest object
-     * @param userList
-     * @param personList
-     * @param eventList
-     */
-    public LoadRequest(User[] userList, Person[] personList, Event[] eventList)
+    public LoadRequest(List<User> userList, List<Person> personList, List<Event> eventList)
     {
-
+        this.users = userList;
+        this.persons = personList;
+        this.events = eventList;
     }
 
-    public User[] getUsers()
+    public List<User> getUsers()
     {
-        return null;
+        return this.users;
     }
 
-    public Person[] getPersons()
+    public List<Person> getPersons()
     {
-        return null;
+        return this.persons;
     }
 
-    public Event[] getEvents()
+    public List<Event> getEvents()
     {
-        return null;
+        return this.events;
     }
 }

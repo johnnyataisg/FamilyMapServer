@@ -110,12 +110,10 @@ public class UserDAO
 
             if (rs.next() == true)
             {
-                System.out.println("Authentication Successful");
                 return true;
             }
             else
             {
-                System.out.println("Authentication Failed");
                 return false;
             }
         }

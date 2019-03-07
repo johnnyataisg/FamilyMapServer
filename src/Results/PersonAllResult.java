@@ -1,24 +1,31 @@
 package Results;
 
 import Models.Person;
+import java.util.ArrayList;
+import java.util.List;
 
-/**
- * A class for looking up all family members of the current user
- */
 public class PersonAllResult
 {
-    private Person[] data;
+    private List<Person> data;
+    private String message;
 
-    /**
-     * Creates a person all result object
-     */
-    public PersonAllResult(Person[] personList)
+    public PersonAllResult(List<Person> data)
     {
-
+        this.data = data;
     }
 
-    public Person[] getData()
+    public PersonAllResult(String msg)
     {
-        return null;
+        this.message = msg;
+    }
+
+    public List<Person> getData()
+    {
+        return this.data;
+    }
+
+    public String getMessage()
+    {
+        return this.message;
     }
 }
