@@ -23,4 +23,19 @@ public class LoginResult
     {
         return this.message;
     }
+
+    public String getAuthToken()
+    {
+        return this.authToken;
+    }
+
+    public String getUserName()
+    {
+        return this.userName;
+    }
+
+    public String getPersonID()
+    {
+        return this.personID;
+    }
 }

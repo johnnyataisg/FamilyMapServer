@@ -6,6 +6,7 @@ import Models.User;
 import Requests.LoginRequest;
 import Requests.RegisterRequest;
 import Results.FillResult;
+import Results.LoginResult;
 import Results.RegisterResult;
 import java.util.UUID;
 
@@ -40,7 +41,9 @@ public class RegisterService
             db.closeConnection(true);
 
             new FillService().fill(request.getUserName(), 4);
-            new LoginService().login(new LoginRequest(request.getUserName(), request.getPassword()));
+            LoginResult loginResult = new LoginService().login(new LoginRequest(request.getUserName(), request.getPassword()));
+
+            result = new RegisterResult(loginResult.getAuthToken(), loginResult.getUserName(), loginResult.getPersonID());
         }
         catch (DataAccessException e)
         {

@@ -36,6 +36,15 @@ class FileHandler implements HttpHandler
             {
                 if (requestPath.equals("/"))
                 {
+                    Database db = new Database();
+                    try
+                    {
+                        db.createTables();
+                    }
+                    catch (DataAccessException e)
+                    {
+
+                    }
                     filePathStr = absolutePath + "index.html";
                     Path filePath = FileSystems.getDefault().getPath(filePathStr);
                     Files.copy(filePath, responseBody);
@@ -116,21 +125,6 @@ class FileHandler implements HttpHandler
                     }
                     responseData = gson.toJson(eventAllResult);
                     writeString(responseData, responseBody);
-                }
-                if (requestPath.equals("/create"))
-                {
-                    Database db = new Database();
-                    try
-                    {
-                        db.createTables();
-                    }
-                    catch (DataAccessException e)
-                    {
-
-                    }
-                    filePathStr = absolutePath + "index.html";
-                    Path filePath = FileSystems.getDefault().getPath(filePathStr);
-                    Files.copy(filePath, responseBody);
                 }
             }
             else
