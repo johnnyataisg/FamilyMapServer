@@ -50,7 +50,6 @@ public class LoadService
         }
         catch (DataAccessException e)
         {
-            e.printStackTrace();
             result = new LoadResult(e.getMessage());
             try
             {
@@ -58,7 +57,6 @@ public class LoadService
             }
             catch (DataAccessException e2)
             {
-                e2.printStackTrace();
                 result = new LoadResult(e2.getMessage());
             }
         }

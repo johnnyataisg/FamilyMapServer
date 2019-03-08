@@ -29,7 +29,6 @@ public class PersonAllService
             db.closeConnection(true);
 
             PersonDAO pDAO = new PersonDAO(db.openConnection());
-            System.out.println("Searching for family members for the user: " + authToken.getUsername());
             List<Person> familyList = pDAO.findFamily(authToken.getUsername());
             if (familyList == null)
             {
@@ -40,7 +39,6 @@ public class PersonAllService
         }
         catch (DataAccessException e)
         {
-            e.printStackTrace();
             result = new PersonAllResult(e.getMessage());
             try
             {
@@ -48,7 +46,6 @@ public class PersonAllService
             }
             catch (DataAccessException e2)
             {
-                e2.printStackTrace();
                 result = new PersonAllResult(e2.getMessage());
             }
         }

@@ -96,7 +96,6 @@ public class FillService
         }
         catch (DataAccessException e)
         {
-            e.printStackTrace();
             result = new FillResult(e.getMessage());
             try
             {
@@ -104,7 +103,6 @@ public class FillService
             }
             catch (DataAccessException e2)
             {
-                e2.printStackTrace();
                 result = new FillResult(e2.getMessage());
             }
         }

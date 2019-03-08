@@ -23,6 +23,48 @@ public class User
         this.personID = personID;
     }
 
+    public boolean equals(Object obj_2)
+    {
+        if (obj_2.getClass() != this.getClass())
+        {
+            return false;
+        }
+        else
+        {
+            User user_2 = (User)obj_2;
+
+            if (!this.userName.equals(user_2.getUsername()))
+            {
+                return false;
+            }
+            if (!this.password.equals(user_2.getPassword()))
+            {
+                return false;
+            }
+            if (!this.email.equals(user_2.getEmail()))
+            {
+                return false;
+            }
+            if (!this.firstName.equals(user_2.getFirstName()))
+            {
+                return false;
+            }
+            if (!this.lastName.equals(user_2.getLastName()))
+            {
+                return false;
+            }
+            if (!this.gender.equals(user_2.getGender()))
+            {
+                return false;
+            }
+            if (!this.personID.equals(user_2.getPersonID()))
+            {
+                return false;
+            }
+            return true;
+        }
+    }
+
     public String getUsername()
     {
         return this.userName;

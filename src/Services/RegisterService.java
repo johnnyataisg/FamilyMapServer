@@ -47,7 +47,6 @@ public class RegisterService
         }
         catch (DataAccessException e)
         {
-            e.printStackTrace();
             result = new RegisterResult(e.getMessage());
             try
             {
@@ -55,7 +54,6 @@ public class RegisterService
             }
             catch (DataAccessException e2)
             {
-                e2.printStackTrace();
                 result = new RegisterResult(e2.getMessage());
             }
         }

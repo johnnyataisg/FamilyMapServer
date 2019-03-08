@@ -23,6 +23,52 @@ public class Person
         this.spouse = spouse;
     }
 
+    public boolean equals(Object obj_2)
+    {
+        if (obj_2.getClass() != this.getClass())
+        {
+            return false;
+        }
+        else
+        {
+            Person person_2 = (Person)obj_2;
+
+            if (!this.personID.equals(person_2.getPersonID()))
+            {
+                return false;
+            }
+            if (!this.descendant.equals(person_2.getDescendant()))
+            {
+                return false;
+            }
+            if (!this.firstName.equals(person_2.getFirstName()))
+            {
+                return false;
+            }
+            if (!this.lastName.equals(person_2.getLastName()))
+            {
+                return false;
+            }
+            if (!this.gender.equals(person_2.getGender()))
+            {
+                return false;
+            }
+            if (!this.father.equals(person_2.getFather()))
+            {
+                return false;
+            }
+            if (!this.mother.equals(person_2.getMother()))
+            {
+                return false;
+            }
+            if (!this.spouse.equals(person_2.getSpouse()))
+            {
+                return false;
+            }
+            return true;
+        }
+    }
+
     public String getPersonID()
     {
         return this.personID;

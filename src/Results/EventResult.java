@@ -33,6 +33,11 @@ public class EventResult
         this.message = msg;
     }
 
+    public String getCity()
+    {
+        return this.city;
+    }
+
     public String getMessage()
     {
         return this.message;

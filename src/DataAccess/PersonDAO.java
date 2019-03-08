@@ -223,43 +223,6 @@ public class PersonDAO
         return commit;
     }
 
-    public boolean clearPersons() throws DataAccessException
-    {
-        boolean commit = true;
-
-        String sql = "DELETE FROM Persons";
-        try
-        {
-            PreparedStatement stmt = this.connection.prepareStatement(sql);
-            stmt.executeUpdate();
-        }
-        catch (SQLException e)
-        {
-            commit = false;
-            throw new DataAccessException("Error executing clear Persons command");
-        }
-        return commit;
-    }
-
-    public int size() throws DataAccessException
-    {
-        String sql = "SELECT COUNT(*) FROM Persons";
-        ResultSet rs = null;
-
-        try
-        {
-            PreparedStatement stmt = this.connection.prepareStatement(sql);
-            rs = stmt.executeQuery();
-
-            int result = rs.getInt("COUNT(*)");
-            return result;
-        }
-        catch (SQLException e)
-        {
-            throw new DataAccessException("Error executing size command");
-        }
-    }
-
     public Connection getConnection()
     {
         return this.connection;

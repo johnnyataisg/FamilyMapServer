@@ -1,7 +1,6 @@
 package Results;
 
 import Models.Person;
-import java.util.ArrayList;
 import java.util.List;
 
 public class PersonAllResult

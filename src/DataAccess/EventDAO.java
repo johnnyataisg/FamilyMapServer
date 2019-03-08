@@ -204,18 +204,6 @@ public class EventDAO
         return commit;
     }
 
-    public boolean deleteEvent(Event event)
-    {
-        //To be implemented
-        return true;
-    }
-
-    public boolean deletePersonEvents(String personID)
-    {
-        //To be implemented
-        return true;
-    }
-
     public boolean clearData(String username) throws DataAccessException
     {
         boolean commit = true;
@@ -234,10 +222,5 @@ public class EventDAO
             throw new DataAccessException("Error executing delete command");
         }
         return commit;
-    }
-
-    public void setConnection(Connection conn)
-    {
-        //To be implemented
     }
 }

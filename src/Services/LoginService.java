@@ -41,7 +41,6 @@ public class LoginService
         }
         catch (DataAccessException e)
         {
-            e.printStackTrace();
             result = new LoginResult(e.getMessage());
             try
             {
@@ -49,7 +48,6 @@ public class LoginService
             }
             catch (DataAccessException e2)
             {
-                e2.printStackTrace();
                 result = new LoginResult(e2.getMessage());
             }
         }

@@ -68,4 +68,9 @@ public class PersonResult
     {
         return this.spouse;
     }
+
+    public String getMessage()
+    {
+        return this.message;
+    }
 }

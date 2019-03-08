@@ -27,7 +27,6 @@ public class PersonService
             db.closeConnection(true);
 
             PersonDAO pDAO = new PersonDAO(db.openConnection());
-            System.out.println("Searching for person with the ID: " + personID);
             Person person = pDAO.find(personID);
             if (person == null)
             {
@@ -42,7 +41,6 @@ public class PersonService
         }
         catch (DataAccessException e)
         {
-            e.printStackTrace();
             result = new PersonResult(e.getMessage());
             try
             {
@@ -50,7 +48,6 @@ public class PersonService
             }
             catch (DataAccessException e2)
             {
-                e2.printStackTrace();
                 result = new PersonResult(e2.getMessage());
             }
         }

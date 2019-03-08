@@ -1,14 +1,10 @@
 package DataAccess;
 
 import Models.AuthToken;
-import Models.User;
-
-import javax.xml.crypto.Data;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.List;
 import java.util.UUID;
 
 public class AuthTokenDAO
@@ -60,12 +56,6 @@ public class AuthTokenDAO
         return null;
     }
 
-    public List<AuthToken> retrieveTokens(String username)
-    {
-        //To be implemented
-        return null;
-    }
-
     public String insertUserAuth(String username) throws DataAccessException
     {
         String token = this.generateToken();
@@ -93,17 +83,5 @@ public class AuthTokenDAO
     private String generateToken()
     {
         return UUID.randomUUID().toString();
-    }
-
-    public boolean deleteToken(String token)
-    {
-        //To be implemented
-        return true;
-    }
-
-    public boolean deleteUserSessions(String username)
-    {
-        //To be implemented
-        return true;
     }
 }

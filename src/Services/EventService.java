@@ -41,7 +41,6 @@ public class EventService
         }
         catch (DataAccessException e)
         {
-            e.printStackTrace();
             result = new EventResult(e.getMessage());
             try
             {
@@ -49,7 +48,6 @@ public class EventService
             }
             catch (DataAccessException e2)
             {
-                e2.printStackTrace();
                 result = new EventResult(e2.getMessage());
             }
         }

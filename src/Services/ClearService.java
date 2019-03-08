@@ -21,7 +21,6 @@ public class ClearService
         }
         catch (DataAccessException e)
         {
-            e.printStackTrace();
             result = new ClearResult(e.getMessage());
         }
         return result;
