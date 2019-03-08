@@ -21,8 +21,8 @@ public class FillService
 
     public FillService()
     {
-        this.peopleAdded = 0;
-        this.eventsAdded = 0;
+        this.peopleAdded = 1;
+        this.eventsAdded = 1;
         try
         {
             Scanner scanner = new Scanner(new File("src/JSON/mnames.json"));
@@ -149,6 +149,18 @@ public class FillService
         int wifeBirthYear = new Random().nextInt(10) - 5 + husbandBirthYear;
         birth = new Event(UUID.randomUUID().toString(), descendant, motherID, place.getLatitude(), place.getLongitude(), place.getCountry(), place.getCity(), "Birth", wifeBirthYear);
         eDAO.insertEvent(birth);
+        this.eventsAdded++;
+
+        place = this.randomLocation();
+        int gradYear = husbandBirthYear + 22;
+        Event graduation = new Event(UUID.randomUUID().toString(), descendant, fatherID, place.getLatitude(), place.getLongitude(), place.getCountry(), place.getCity(), "College Graduation", gradYear);
+        eDAO.insertEvent(graduation);
+        this.eventsAdded++;
+
+        place = this.randomLocation();
+        gradYear = wifeBirthYear + 22;
+        graduation = new Event(UUID.randomUUID().toString(), descendant, motherID, place.getLatitude(), place.getLongitude(), place.getCountry(), place.getCity(), "College Graduation", gradYear);
+        eDAO.insertEvent(graduation);
         this.eventsAdded++;
 
         place = this.randomLocation();
