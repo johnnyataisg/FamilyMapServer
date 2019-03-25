@@ -2,27 +2,30 @@ package Results;
 
 import Models.Event;
 
-/**
- * A class for event all service results
- */
+import java.util.List;
+
 public class EventAllResult
 {
-    /**
-     * Array of event objects
-     */
-    private Event[] data;
+    private List<Event> data;
+    private String message;
 
-    /**
-     * Creates an event all result object
-     * @param eventList
-     */
-    public EventAllResult(Event[] eventList)
+    public EventAllResult(List<Event> data)
     {
-
+        this.data = data;
     }
 
-    public Event[] getData()
+    public EventAllResult(String msg)
     {
-        return null;
+        this.message = msg;
+    }
+
+    public List<Event> getData()
+    {
+        return this.data;
+    }
+
+    public String getMessage()
+    {
+        return this.message;
     }
 }

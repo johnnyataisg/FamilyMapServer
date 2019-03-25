@@ -1,90 +1,112 @@
 package Models;
-/**
- * A Person class
- */
+
 public class Person
 {
-    /**
-     * Unique ID for the person
-     */
     private String personID;
-    /**
-     * This person's descendant, or null if none
-     */
     private String descendant;
-    /**
-     * Person's first name
-     */
     private String firstName;
-    /**
-     * Person's last name
-     */
     private String lastName;
-    /**
-     * Person's gender
-     */
-    private char gender;
-    /**
-     * PersonID of this person's father, null if none
-     */
+    private String gender;
     private String father;
-    /**
-     * PersonID of this person's mother, null if none
-     */
     private String mother;
-    /**
-     * PersonID of this person's spouse, null if none
-     */
     private String spouse;
 
-    /**
-     * Default constructor that creates an empty Person object
-     */
-    public Person()
+    public Person(String personID, String descendant, String firstName, String lastName, String gender, String father, String mother, String spouse)
     {
-        //To be implemented
+        this.personID = personID;
+        this.descendant = descendant;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.gender = gender;
+        this.father = father;
+        this.mother = mother;
+        this.spouse = spouse;
+    }
+
+    public boolean equals(Object obj_2)
+    {
+        if (obj_2.getClass() != this.getClass())
+        {
+            return false;
+        }
+        else
+        {
+            Person person_2 = (Person)obj_2;
+
+            if (!this.personID.equals(person_2.getPersonID()))
+            {
+                return false;
+            }
+            if (!this.descendant.equals(person_2.getDescendant()))
+            {
+                return false;
+            }
+            if (!this.firstName.equals(person_2.getFirstName()))
+            {
+                return false;
+            }
+            if (!this.lastName.equals(person_2.getLastName()))
+            {
+                return false;
+            }
+            if (!this.gender.equals(person_2.getGender()))
+            {
+                return false;
+            }
+            if (!this.father.equals(person_2.getFather()))
+            {
+                return false;
+            }
+            if (!this.mother.equals(person_2.getMother()))
+            {
+                return false;
+            }
+            if (!this.spouse.equals(person_2.getSpouse()))
+            {
+                return false;
+            }
+            return true;
+        }
     }
 
     public String getPersonID()
     {
-        //To be implemented
-        return "";
+        return this.personID;
     }
 
     public String getDescendant()
     {
-        //To be implemented
-        return "";
+        return this.descendant;
     }
 
     public String getFirstName()
     {
-        //To be implemented
-        return "";
+        return this.firstName;
     }
 
     public String getLastName()
     {
-        //To be implemented
-        return "";
+        return this.lastName;
     }
 
     public String getFather()
     {
-        //To be implemented
-        return "";
+        return this.father;
     }
 
     public String getMother()
     {
-        //To be implemented
-        return "";
+        return this.mother;
     }
 
     public String getSpouse()
     {
-        //To be implemented
-        return "";
+        return this.spouse;
+    }
+
+    public String getGender()
+    {
+        return this.gender;
     }
 
     public void setPersonID()

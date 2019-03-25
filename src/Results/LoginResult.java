@@ -1,50 +1,41 @@
 package Results;
 
-import Models.User;
-
-/**
- * A class for a user login result
- */
 public class LoginResult
 {
-    /**
-     * User's authentication token
-     */
-
     private String authToken;
-    /**
-     * User's username
-     */
     private String userName;
-
-    /**
-     * User's person ID
-     */
     private String personID;
+    private String message;
 
-    /**
-     * Creates a login result object
-     * @param token
-     * @param user
-     * @param perID
-     */
     public LoginResult(String token, String user, String perID)
     {
-
+        this.authToken = token;
+        this.userName = user;
+        this.personID = perID;
     }
 
-    public String getToken()
+    public LoginResult(String msg)
     {
-        return null;
+        this.message = msg;
     }
 
-    public String getUsername()
+    public String getMessage()
     {
-        return null;
+        return this.message;
+    }
+
+    public String getAuthToken()
+    {
+        return this.authToken;
+    }
+
+    public String getUserName()
+    {
+        return this.userName;
     }
 
     public String getPersonID()
     {
-        return null;
+        return this.personID;
     }
 }

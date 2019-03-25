@@ -1,26 +1,28 @@
 package Services;
 
+import DataAccess.DataAccessException;
+import DataAccess.Database;
 import Results.ClearResult;
 
-/**
- * A class that handles deletion of data from the database
- */
 public class ClearService
 {
-    /**
-     * Default constructor that creates an empty clear service object
-     */
-    public ClearService()
-    {
+    public ClearService() {}
 
-    }
-
-    /**
-     * Clears all data from the database
-     * @return
-     */
     public ClearResult clear()
     {
-        return null;
+        Database db = new Database();
+        ClearResult result = null;
+        try
+        {
+            //Delete all data from all tables in the database
+            db.openConnection();
+            db.clearTables();
+            result = new ClearResult("Clear succeeded.");
+        }
+        catch (DataAccessException e)
+        {
+            result = new ClearResult(e.getMessage());
+        }
+        return result;
     }
 }

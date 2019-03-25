@@ -1,94 +1,226 @@
 package DataAccess;
 
 import Models.Event;
-
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
-/**
- * A class for reading and writing in the Event table in the database
- */
 public class EventDAO
 {
-    /**
-     * A database connection instance
-     */
     private Connection connection;
 
-    /**
-     * Default constructor to create an empty EventDAO
-     */
-    public EventDAO()
-    {
-        //To be implemented
-    }
+    public EventDAO() {}
 
-    /**
-     * Creates an EventDAO object and sets its database connection
-     * @param conn A database connection object
-     */
     public EventDAO(Connection conn)
     {
-        //To be implemented
+        this.connection = conn;
     }
 
-    /**
-     * Looks up a personID in the database and retrieves all events related to that person
-     * @param personID
-     * @return
-     */
-    public List<Event> retrieveEvents(String personID)
+    public List<Event> retrieveFamilyEvents(String username) throws DataAccessException
     {
-        //To be implemented
+        List<Event> eventList = new ArrayList<>();
+        ResultSet rs = null;
+        String sql = "SELECT * FROM Events WHERE Descendant = ?";
+
+        try
+        {
+            PreparedStatement stmt = this.connection.prepareStatement(sql);
+            stmt.setString(1, username);
+            rs = stmt.executeQuery();
+            while (rs.next() == true)
+            {
+                Event event = new Event(rs.getString("EventID"),
+                        rs.getString("Descendant"),
+                        rs.getString("PersonID"),
+                        rs.getDouble("Latitude"),
+                        rs.getDouble("Longitude"),
+                        rs.getString("Country"),
+                        rs.getString("City"),
+                        rs.getString("EventType"),
+                        rs.getInt("Year"));
+                eventList.add(event);
+            }
+            if (eventList.size() != 0)
+            {
+                return eventList;
+            }
+        }
+        catch (SQLException e)
+        {
+            e.printStackTrace();
+            throw new DataAccessException("Error executing find command");
+        }
+        finally
+        {
+            if (rs != null)
+            {
+                try
+                {
+                    rs.close();
+                }
+                catch (SQLException e)
+                {
+                    e.printStackTrace();
+                }
+            }
+        }
         return null;
     }
 
-    /**
-     * Looks up the eventID in the database and retrieves the event with that ID
-     * @param eventID
-     * @return
-     */
-    public Event retrieveEvent(String eventID)
+    public Event retrieveEvent(String eventID) throws DataAccessException
     {
-        //To be implemented
+        Event event = null;
+        ResultSet rs = null;
+        String sql = "SELECT * FROM Events WHERE EventID = ?";
+
+        try
+        {
+            PreparedStatement stmt = this.connection.prepareStatement(sql);
+            stmt.setString(1, eventID);
+            rs = stmt.executeQuery();
+            if (rs.next() == true)
+            {
+                event = new Event(rs.getString("EventID"),
+                        rs.getString("Descendant"),
+                        rs.getString("PersonID"),
+                        rs.getDouble("Latitude"),
+                        rs.getDouble("Longitude"),
+                        rs.getString("Country"),
+                        rs.getString("City"),
+                        rs.getString("EventType"),
+                        rs.getInt("Year"));
+                return event;
+            }
+        }
+        catch (SQLException e)
+        {
+            e.printStackTrace();
+            throw new DataAccessException("Error executing find command");
+        }
+        finally
+        {
+            if (rs != null)
+            {
+                try
+                {
+                    rs.close();
+                }
+                catch (SQLException e)
+                {
+                    e.printStackTrace();
+                }
+            }
+        }
         return null;
     }
 
-    /**
-     * Inserts an event into the database if the eventID doesn't exist, else return false
-     * @param event
-     * @return
-     */
-    public boolean insertEvent(Event event)
+    public Event retrieveBirthEvent(String personID) throws DataAccessException
     {
-        //To be implemented
-        return true;
+        Event event = null;
+        ResultSet rs = null;
+        String sql = "SELECT * FROM Events WHERE PersonID = ? AND EventType = 'Birth'";
+
+        try
+        {
+            PreparedStatement stmt = this.connection.prepareStatement(sql);
+            stmt.setString(1, personID);
+            rs = stmt.executeQuery();
+            if (rs.next() == true)
+            {
+                event = new Event(rs.getString("EventID"),
+                        rs.getString("Descendant"),
+                        rs.getString("PersonID"),
+                        rs.getDouble("Latitude"),
+                        rs.getDouble("Longitude"),
+                        rs.getString("Country"),
+                        rs.getString("City"),
+                        rs.getString("EventType"),
+                        rs.getInt("Year"));
+                return event;
+            }
+        }
+        catch (SQLException e)
+        {
+            e.printStackTrace();
+            throw new DataAccessException("Error executing find command");
+        }
+        finally
+        {
+            if (rs != null)
+            {
+                try
+                {
+                    rs.close();
+                }
+                catch (SQLException e)
+                {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return null;
     }
 
-    /**
-     * Deletes an event from the database if it exists, else return false
-     * @param event
-     * @return
-     */
-    public boolean deleteEvent(Event event)
+    public boolean insertEvent(Event event) throws DataAccessException
     {
-        //To be implemented
-        return true;
+        boolean commit = true;
+
+        String sql = "INSERT INTO Events " +
+                "(" +
+                "EventID, " +
+                "Descendant, " +
+                "PersonID, " +
+                "Latitude, " +
+                "Longitude, " +
+                "Country, " +
+                "City, " +
+                "EventType, " +
+                "Year" +
+                ") " +
+                "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
+        try
+        {
+            PreparedStatement stmt = this.connection.prepareStatement(sql);
+            stmt.setString(1, event.getEventID());
+            stmt.setString(2, event.getDescendant());
+            stmt.setString(3, event.getPerson());
+            stmt.setString(4, String.valueOf(event.getLatitude()));
+            stmt.setString(5, String.valueOf(event.getLongitude()));
+            stmt.setString(6, event.getCountry());
+            stmt.setString(7, event.getCity());
+            stmt.setString(8, event.getEventType());
+            stmt.setString(9, String.valueOf(event.getYear()));
+            stmt.executeUpdate();
+        }
+        catch (SQLException e)
+        {
+            commit = false;
+            throw new DataAccessException("Error executing insert command");
+        }
+        return commit;
     }
 
-    /**
-     * Deletes all events associated with a personID if that personID exists, else return false
-     * @param personID
-     * @return
-     */
-    public boolean deleteEvents(String personID)
+    public boolean clearData(String username) throws DataAccessException
     {
-        //To be implemented
-        return true;
-    }
+        boolean commit = true;
+        String sql = "DELETE FROM Events WHERE Descendant = ?";
 
-    public void setConnection(Connection conn)
-    {
-        //To be implemented
+        try
+        {
+            PreparedStatement stmt = this.connection.prepareStatement(sql);
+            stmt.setString(1, username);
+            stmt.executeUpdate();
+        }
+        catch (Exception e)
+        {
+            commit = false;
+            e.printStackTrace();
+            throw new DataAccessException("Error executing delete command");
+        }
+        return commit;
     }
 }

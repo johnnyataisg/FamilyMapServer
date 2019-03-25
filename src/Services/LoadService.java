@@ -1,28 +1,65 @@
 package Services;
 
+import DataAccess.*;
+import Models.Event;
+import Models.Person;
+import Models.User;
 import Requests.LoadRequest;
 import Results.LoadResult;
 
-/**
- * A class for clearing and loading data into the database
- */
+import java.util.List;
+
 public class LoadService
 {
-    /**
-     * Creates a Load instance
-     */
-    public LoadService()
-    {
-        //To be implemented
-    }
+    public LoadService() {}
 
-    /**
-     * Clears all data from the database and then loads data in
-     * @param request
-     * @return
-     */
     public LoadResult load(LoadRequest request)
     {
-        return null;
+        List<User> userList = request.getUsers();
+        List<Person> personList = request.getPersons();
+        List<Event> eventList = request.getEvents();
+
+        Database db = new Database();
+        LoadResult result = null;
+        try
+        {
+            new ClearService().clear();
+
+            PersonDAO pDAO = new PersonDAO(db.openConnection());
+            for (Person person : personList)
+            {
+                pDAO.insert(person);
+            }
+            db.closeConnection(true);
+
+            UserDAO uDAO = new UserDAO(db.openConnection());
+            for (User user : userList)
+            {
+                uDAO.insert(user);
+            }
+            db.closeConnection(true);
+
+            EventDAO eDAO = new EventDAO(db.openConnection());
+            for (Event event : eventList)
+            {
+                eDAO.insertEvent(event);
+            }
+            db.closeConnection(true);
+
+            result = new LoadResult("Successfully added " + userList.size() + " users, " + personList.size() + " persons, and " + eventList.size() + " events to the database.");
+        }
+        catch (DataAccessException e)
+        {
+            result = new LoadResult(e.getMessage());
+            try
+            {
+                db.closeConnection(false);
+            }
+            catch (DataAccessException e2)
+            {
+                result = new LoadResult(e2.getMessage());
+            }
+        }
+        return result;
     }
 }

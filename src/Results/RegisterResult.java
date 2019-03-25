@@ -1,49 +1,41 @@
 package Results;
 
-import Models.User;
-
-/**
- * A class for a user registration result
- */
 public class RegisterResult
 {
-    /**
-     * The authentication token created for this new user
-     */
     private String authToken;
-
-    /**
-     * The username of this new user
-     */
     private String userName;
-
-    /**
-     * The Person ID of the user's generated Person object
-     */
     private String personID;
+    private String message;
 
-    /**
-     * Create a success response with the new user's information and authentication token
-     * @param token
-     * @param user
-     * @param perID
-     */
     public RegisterResult(String token, String user, String perID)
     {
+        this.authToken = token;
+        this.userName = user;
+        this.personID = perID;
+    }
+
+    public RegisterResult(String msg)
+    {
+        this.message = msg;
     }
 
      public String getToken()
      {
-         return null;
+         return this.authToken;
      }
 
      public String getUsername()
      {
-         return null;
+         return this.userName;
      }
 
      public String getPersonID()
      {
-         return null;
+         return this.personID;
+     }
+
+     public String getMessage()
+     {
+         return this.message;
      }
 }

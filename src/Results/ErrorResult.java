@@ -1,26 +1,16 @@
 package Results;
 
-/**
- * A class for errors pertaining to services
- */
 public class ErrorResult
 {
-    /**
-     * Error message
-     */
     private String message;
 
-    /**
-     * Creates an error messsage
-     * @param msg
-     */
     public ErrorResult(String msg)
     {
-        //To be implemented
+        this.message = msg;
     }
 
     public String getMessage()
     {
-        return null;
+        return this.message;
     }
 }

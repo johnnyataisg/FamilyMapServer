@@ -1,115 +1,102 @@
 package Models;
+
 import java.sql.Connection;
 
-/**
- * A class for a user
- */
 public class User
 {
-    /**
-     * Unique username of this user
-     */
-    private String username;
-    /**
-     * Password of this user
-     */
+    private String userName;
     private String password;
-    /**
-     * Email of this user
-     */
     private String email;
-    /**
-     * First name of this user
-     */
     private String firstName;
-    /**
-     * Last name of this user
-     */
     private String lastName;
-    /**
-     * Gender of this user
-     */
-    private char gender;
-    /**
-     * Unique ID for the person corresponding to this user
-     */
+    private String gender;
     private String personID;
 
-    /**
-     * The single constructor for users
-     * Sets this object's username to user and password to pass
-     * @param user
-     * @param pass
-     */
-    public User(String user, String pass)
+    public User(String username, String password, String email, String firstName, String lastName, String gender, String personID)
     {
-        //To be implemented later
+        this.userName = username;
+        this.password = password;
+        this.email = email;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.gender = gender;
+        this.personID = personID;
+    }
+
+    public boolean equals(Object obj_2)
+    {
+        if (obj_2.getClass() != this.getClass())
+        {
+            return false;
+        }
+        else
+        {
+            User user_2 = (User)obj_2;
+
+            if (!this.userName.equals(user_2.getUsername()))
+            {
+                return false;
+            }
+            if (!this.password.equals(user_2.getPassword()))
+            {
+                return false;
+            }
+            if (!this.email.equals(user_2.getEmail()))
+            {
+                return false;
+            }
+            if (!this.firstName.equals(user_2.getFirstName()))
+            {
+                return false;
+            }
+            if (!this.lastName.equals(user_2.getLastName()))
+            {
+                return false;
+            }
+            if (!this.gender.equals(user_2.getGender()))
+            {
+                return false;
+            }
+            if (!this.personID.equals(user_2.getPersonID()))
+            {
+                return false;
+            }
+            return true;
+        }
     }
 
     public String getUsername()
     {
-        //To be implemented later
-        return "";
+        return this.userName;
     }
 
     public String getPassword()
     {
-        //To be implemented later
-        return "";
+        return this.password;
     }
 
     public String getEmail()
     {
-        //To be implemented later
-        return "";
+        return this.email;
     }
 
     public String getFirstName()
     {
-        //To be implemented later
-        return "";
+        return this.firstName;
     }
 
     public String getLastName()
     {
-        //To be implemented later
-        return "";
+        return this.lastName;
     }
 
-    public char getGender()
+    public String getGender()
     {
-        //To be implemented later
-        return 'a';
+        return this.gender;
     }
 
     public String getPersonID()
     {
-        //To be implemented later
-        return "";
-    }
-
-    public void setEmail()
-    {
-        //To be implemented later
-    }
-
-    public void setFirstName()
-    {
-        //To be implemented later
-    }
-
-    public void setLastName()
-    {
-        //To be implemented later
-    }
-
-    public void setGender()
-    {
-        //To be implemented later
-    }
-
-    public void setPeopleID()
-    {
-        //To be implemented later
+        return this.personID;
     }
 }
