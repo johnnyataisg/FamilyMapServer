@@ -1,17 +1,17 @@
+package Handlers;
+
 import java.io.*;
 import java.net.*;
 import DataAccess.DataAccessException;
 import DataAccess.Database;
 import Requests.LoadRequest;
-import Requests.LoginRequest;
-import Requests.RegisterRequest;
 import Results.*;
 import Services.*;
 import com.sun.net.httpserver.*;
 import com.google.gson.*;
 import java.nio.file.*;
 
-class FileHandler implements HttpHandler
+public class BaseContext implements HttpHandler
 {
     static String absolutePath = System.getProperty("user.dir") + "/src/Web/";
 
@@ -32,6 +32,7 @@ class FileHandler implements HttpHandler
             String filePathStr = null;
 
             exchange.sendResponseHeaders(HttpURLConnection.HTTP_OK, 0);
+
             if (exchange.getRequestMethod().equals("GET"))
             {
                 if (requestPath.equals("/"))
@@ -129,54 +130,6 @@ class FileHandler implements HttpHandler
             }
             else
             {
-                if (requestPath.equals("/user/register"))
-                {
-                    RegisterResult registerResult = null;
-                    try
-                    {
-                        registerResult = new RegisterService().register(gson.fromJson(requestBody, RegisterRequest.class));
-                    }
-                    catch (Exception e)
-                    {
-                        registerResult = new RegisterResult("Request property missing or has invalid value");
-                    }
-                    responseData = gson.toJson(registerResult);
-                    writeString(responseData, responseBody);
-                }
-                if (requestPath.equals("/user/login"))
-                {
-                    LoginResult loginResult = null;
-                    try
-                    {
-                        loginResult = new LoginService().login(gson.fromJson(requestBody, LoginRequest.class));
-                    }
-                    catch (Exception e)
-                    {
-                        loginResult = new LoginResult("Request property missing or has invalid value");
-                    }
-                    responseData = gson.toJson(loginResult);
-                    writeString(responseData, responseBody);
-                }
-                if (requestPath.equals("/load"))
-                {
-                    LoadResult loadResult = null;
-                    try
-                    {
-                        loadResult = new LoadService().load(gson.fromJson(requestBody, LoadRequest.class));
-                    }
-                    catch (Exception e)
-                    {
-                        loadResult = new LoadResult("Invalid request data");
-                    }
-                    responseData = gson.toJson(loadResult);
-                    writeString(responseData, responseBody);
-                }
-                if (requestPath.equals("/clear"))
-                {
-                    ClearResult clearResult = new ClearService().clear();
-                    responseData = gson.toJson(clearResult);
-                    writeString(responseData, responseBody);
-                }
                 if (requestPath.matches("/fill/([a-zA-Z_0-9]+)"))
                 {
                     FillResult fillResult = new FillService().fill(requestPath.substring(6), 4);

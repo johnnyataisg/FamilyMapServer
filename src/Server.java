@@ -1,8 +1,6 @@
 import java.io.*;
 import java.net.*;
-import java.util.Scanner;
-
-import Tests.*;
+import Handlers.*;
 import com.sun.net.httpserver.*;
 
 public class Server
@@ -28,7 +26,11 @@ public class Server
 
         System.out.println("Creating contexts");
 
-        server.createContext("/", new FileHandler());
+        server.createContext("/", new BaseContext());
+        server.createContext("/user/register", new RegisterContext());
+        server.createContext("/user/login", new LoginContext());
+        server.createContext("/clear", new ClearContext());
+        server.createContext("/load", new LoadContext());
 
         System.out.println("Starting server");
 
