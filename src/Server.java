@@ -39,16 +39,7 @@ public class Server
 
     public static void main(String[] args) throws Exception
     {
-        org.junit.runner.JUnitCore.runClasses(RegisterTest.class, LoginTest.class, ClearTest.class, FillTest.class, LoadTest.class, PersonTest.class,
-                PersonAllTest.class, EventTest.class, EventAllTest.class, PersonDAOTest.class, UserDAOTest.class, EventDAOTest.class, AuthTokenDAOTest.class);
-        org.junit.runner.JUnitCore.main("Tests.RegisterTest", "Tests.LoginTest", "Tests.ClearTest", "Tests.FillTest", "Tests.LoadTest",
-                "Tests.PersonTest", "Tests.PersonAllTest", "Tests.EventTest", "Tests.EventAllTest", "Tests.PersonDAOTest", "Tests.UserDAOTest", "Tests.EventDAOTest", "Tests.AuthTokenDAOTest");
-
         String portNumber = args[0];
         new Server().run(portNumber);
-
-        System.out.println();
-
-
     }
 }
