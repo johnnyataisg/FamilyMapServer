@@ -2,13 +2,12 @@ package Handlers;
 
 import java.io.*;
 import java.net.*;
-import DataAccess.DataAccessException;
-import DataAccess.Database;
+import Results.*;
+import Services.*;
 import com.sun.net.httpserver.*;
 import com.google.gson.*;
-import java.nio.file.*;
 
-public class BaseContext implements HttpHandler
+public class EventContext implements HttpHandler
 {
     static String absolutePath = System.getProperty("user.dir") + "/src/Web/";
 
@@ -30,41 +29,35 @@ public class BaseContext implements HttpHandler
 
             exchange.sendResponseHeaders(HttpURLConnection.HTTP_OK, 0);
 
-            if (exchange.getRequestMethod().equals("GET"))
+            if (requestPath.equals("/event") && exchange.getRequestMethod().equals("GET"))
             {
-                if (requestPath.equals("/"))
+                EventAllResult eventAllResult = null;
+                if (requestHeader.containsKey("Authorization"))
                 {
-                    Database db = new Database();
-                    try
-                    {
-                        db.createTables();
-                    }
-                    catch (DataAccessException e)
-                    {
-
-                    }
-                    filePathStr = absolutePath + "index.html";
-                    Path filePath = FileSystems.getDefault().getPath(filePathStr);
-                    Files.copy(filePath, responseBody);
+                    System.out.println("Starting person all service");
+                    eventAllResult = new EventAllService().event(requestHeader.getFirst("Authorization"));
                 }
-                if (requestPath.equals("/css/main.css"))
+                else
                 {
-                    filePathStr = absolutePath + "css/main.css";
-                    Path filePath = FileSystems.getDefault().getPath(filePathStr);
-                    Files.copy(filePath, responseBody);
+                    eventAllResult = new EventAllResult("No authentication token provided");
                 }
-                if (requestPath.equals("HTML/404.html"))
+                responseData = gson.toJson(eventAllResult);
+                writeString(responseData, responseBody);
+            }
+            else if (requestPath.matches("/event/([-a-zA-Z_0-9]+)") && exchange.getRequestMethod().equals("GET"))
+            {
+                EventResult eventResult = null;
+                if (requestHeader.containsKey("Authorization"))
                 {
-                    filePathStr = absolutePath + "HTML/404.html";
-                    Path filePath = FileSystems.getDefault().getPath(filePathStr);
-                    Files.copy(filePath, responseBody);
+                    System.out.println("Starting event service");
+                    eventResult = new EventService().event(requestPath.substring(7), requestHeader.getFirst("Authorization"));
                 }
-                if (requestPath.equals("/favicon.ico"))
+                else
                 {
-                    filePathStr = absolutePath + "favicon.ico";
-                    Path filePath = FileSystems.getDefault().getPath(filePathStr);
-                    Files.copy(filePath, responseBody);
+                    eventResult = new EventResult("No authentication token provided");
                 }
+                responseData = gson.toJson(eventResult);
+                writeString(responseData, responseBody);
             }
             responseBody.close();
         }

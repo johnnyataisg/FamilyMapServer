@@ -31,6 +31,9 @@ public class Server
         server.createContext("/user/login", new LoginContext());
         server.createContext("/clear", new ClearContext());
         server.createContext("/load", new LoadContext());
+        server.createContext("/person", new PersonContext());
+        server.createContext("/event", new EventContext());
+        server.createContext("/fill", new FillContext());
 
         System.out.println("Starting server");
 

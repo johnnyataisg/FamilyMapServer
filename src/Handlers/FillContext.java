@@ -2,13 +2,12 @@ package Handlers;
 
 import java.io.*;
 import java.net.*;
-import DataAccess.DataAccessException;
-import DataAccess.Database;
+import Results.*;
+import Services.*;
 import com.sun.net.httpserver.*;
 import com.google.gson.*;
-import java.nio.file.*;
 
-public class BaseContext implements HttpHandler
+public class FillContext implements HttpHandler
 {
     static String absolutePath = System.getProperty("user.dir") + "/src/Web/";
 
@@ -30,41 +29,18 @@ public class BaseContext implements HttpHandler
 
             exchange.sendResponseHeaders(HttpURLConnection.HTTP_OK, 0);
 
-            if (exchange.getRequestMethod().equals("GET"))
+            if (requestPath.matches("/fill/([a-zA-Z_0-9]+)") && exchange.getRequestMethod().equals("POST"))
             {
-                if (requestPath.equals("/"))
-                {
-                    Database db = new Database();
-                    try
-                    {
-                        db.createTables();
-                    }
-                    catch (DataAccessException e)
-                    {
-
-                    }
-                    filePathStr = absolutePath + "index.html";
-                    Path filePath = FileSystems.getDefault().getPath(filePathStr);
-                    Files.copy(filePath, responseBody);
-                }
-                if (requestPath.equals("/css/main.css"))
-                {
-                    filePathStr = absolutePath + "css/main.css";
-                    Path filePath = FileSystems.getDefault().getPath(filePathStr);
-                    Files.copy(filePath, responseBody);
-                }
-                if (requestPath.equals("HTML/404.html"))
-                {
-                    filePathStr = absolutePath + "HTML/404.html";
-                    Path filePath = FileSystems.getDefault().getPath(filePathStr);
-                    Files.copy(filePath, responseBody);
-                }
-                if (requestPath.equals("/favicon.ico"))
-                {
-                    filePathStr = absolutePath + "favicon.ico";
-                    Path filePath = FileSystems.getDefault().getPath(filePathStr);
-                    Files.copy(filePath, responseBody);
-                }
+                FillResult fillResult = new FillService().fill(requestPath.substring(6), 4);
+                responseData = gson.toJson(fillResult);
+                writeString(responseData, responseBody);
+            }
+            else if (requestPath.matches("/fill/([-a-zA-Z_0-9]+)/([0-9]+)") && exchange.getRequestMethod().equals("POST"))
+            {
+                int index = requestPath.lastIndexOf("/");
+                FillResult fillResult = new FillService().fill(requestPath.substring(6, index), Integer.parseInt(requestPath.substring(index + 1)));
+                responseData = gson.toJson(fillResult);
+                writeString(responseData, responseBody);
             }
             responseBody.close();
         }

@@ -2,13 +2,12 @@ package Handlers;
 
 import java.io.*;
 import java.net.*;
-import DataAccess.DataAccessException;
-import DataAccess.Database;
+import Results.*;
+import Services.*;
 import com.sun.net.httpserver.*;
 import com.google.gson.*;
-import java.nio.file.*;
 
-public class BaseContext implements HttpHandler
+public class PersonContext implements HttpHandler
 {
     static String absolutePath = System.getProperty("user.dir") + "/src/Web/";
 
@@ -30,41 +29,34 @@ public class BaseContext implements HttpHandler
 
             exchange.sendResponseHeaders(HttpURLConnection.HTTP_OK, 0);
 
-            if (exchange.getRequestMethod().equals("GET"))
+            if (requestPath.equals("/person") && exchange.getRequestMethod().equals("GET"))
             {
-                if (requestPath.equals("/"))
+                PersonAllResult personAllResult = null;
+                if (requestHeader.containsKey("Authorization"))
                 {
-                    Database db = new Database();
-                    try
-                    {
-                        db.createTables();
-                    }
-                    catch (DataAccessException e)
-                    {
-
-                    }
-                    filePathStr = absolutePath + "index.html";
-                    Path filePath = FileSystems.getDefault().getPath(filePathStr);
-                    Files.copy(filePath, responseBody);
+                    personAllResult = new PersonAllService().person(requestHeader.getFirst("Authorization"));
                 }
-                if (requestPath.equals("/css/main.css"))
+                else
                 {
-                    filePathStr = absolutePath + "css/main.css";
-                    Path filePath = FileSystems.getDefault().getPath(filePathStr);
-                    Files.copy(filePath, responseBody);
+                    personAllResult = new PersonAllResult("No authentication token provided");
                 }
-                if (requestPath.equals("HTML/404.html"))
+                responseData = gson.toJson(personAllResult);
+                writeString(responseData, responseBody);
+            }
+            else if (requestPath.matches("/person/([-a-zA-Z_0-9]+)") && exchange.getRequestMethod().equals("GET"))
+            {
+                PersonResult personResult = null;
+                if (requestHeader.containsKey("Authorization"))
                 {
-                    filePathStr = absolutePath + "HTML/404.html";
-                    Path filePath = FileSystems.getDefault().getPath(filePathStr);
-                    Files.copy(filePath, responseBody);
+                    System.out.println("Starting person service");
+                    personResult = new PersonService().person(requestPath.substring(8), requestHeader.getFirst("Authorization"));
                 }
-                if (requestPath.equals("/favicon.ico"))
+                else
                 {
-                    filePathStr = absolutePath + "favicon.ico";
-                    Path filePath = FileSystems.getDefault().getPath(filePathStr);
-                    Files.copy(filePath, responseBody);
+                    personResult = new PersonResult("No authentication token provided");
                 }
+                responseData = gson.toJson(personResult);
+                writeString(responseData, responseBody);
             }
             responseBody.close();
         }
