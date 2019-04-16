@@ -3,17 +3,17 @@ package Results;
 import Models.Event;
 import java.util.List;
 
-public class EventAllResult
+public class EventRelatedResult
 {
     private List<Event> data;
     private String message;
 
-    public EventAllResult(List<Event> data)
+    public EventRelatedResult(List<Event> data)
     {
         this.data = data;
     }
 
-    public EventAllResult(String msg)
+    public EventRelatedResult(String msg)
     {
         this.message = msg;
     }

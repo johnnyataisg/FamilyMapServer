@@ -19,6 +19,57 @@ public class EventDAO
         this.connection = conn;
     }
 
+    public List<Event> retrieveRelatedEvents(String personID) throws DataAccessException
+    {
+        List<Event> eventList = new ArrayList<>();
+        ResultSet rs = null;
+        String sql = "SELECT * FROM Events WHERE PersonID = ? ORDER BY Year ASC";
+
+        try
+        {
+            PreparedStatement stmt = this.connection.prepareStatement(sql);
+            stmt.setString(1, personID);
+            rs = stmt.executeQuery();
+            while (rs.next() == true)
+            {
+                Event event = new Event(rs.getString("EventID"),
+                        rs.getString("Descendant"),
+                        rs.getString("PersonID"),
+                        rs.getDouble("Latitude"),
+                        rs.getDouble("Longitude"),
+                        rs.getString("Country"),
+                        rs.getString("City"),
+                        rs.getString("EventType"),
+                        rs.getInt("Year"));
+                eventList.add(event);
+            }
+            if (eventList.size() != 0)
+            {
+                return eventList;
+            }
+        }
+        catch (SQLException e)
+        {
+            e.printStackTrace();
+            throw new DataAccessException("Error executing find command");
+        }
+        finally
+        {
+            if (rs != null)
+            {
+                try
+                {
+                    rs.close();
+                }
+                catch (SQLException e)
+                {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return null;
+    }
+
     public List<Event> retrieveFamilyEvents(String username) throws DataAccessException
     {
         List<Event> eventList = new ArrayList<>();

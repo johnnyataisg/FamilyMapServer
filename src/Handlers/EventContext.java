@@ -34,7 +34,6 @@ public class EventContext implements HttpHandler
                 EventAllResult eventAllResult = null;
                 if (requestHeader.containsKey("Authorization"))
                 {
-                    System.out.println("Starting person all service");
                     eventAllResult = new EventAllService().event(requestHeader.getFirst("Authorization"));
                 }
                 else
@@ -49,7 +48,6 @@ public class EventContext implements HttpHandler
                 EventResult eventResult = null;
                 if (requestHeader.containsKey("Authorization"))
                 {
-                    System.out.println("Starting event service");
                     eventResult = new EventService().event(requestPath.substring(7), requestHeader.getFirst("Authorization"));
                 }
                 else
@@ -57,6 +55,20 @@ public class EventContext implements HttpHandler
                     eventResult = new EventResult("No authentication token provided");
                 }
                 responseData = gson.toJson(eventResult);
+                writeString(responseData, responseBody);
+            }
+            else if (requestPath.matches("/event/person/([-a-zA-Z_0-9]+)") && exchange.getRequestMethod().equals("GET"))
+            {
+                EventRelatedResult eventRelatedResult = null;
+                if (requestHeader.containsKey("Authorization"))
+                {
+                    eventRelatedResult = new EventRelatedService().event(requestPath.substring(14), requestHeader.getFirst("Authorization"));
+                }
+                else
+                {
+                    eventRelatedResult = new EventRelatedResult("No authentication token provided");
+                }
+                responseData = gson.toJson(eventRelatedResult);
                 writeString(responseData, responseBody);
             }
             responseBody.close();
